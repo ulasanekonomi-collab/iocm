@@ -35,7 +35,7 @@ X_target = [X1, X2, X3]
 # ==========================================
 # RUNNING ENGINE COMPUTATION
 # ==========================================
-Z_prime, A, L, multipliers, error_mode, theta_nat_computed = calculate_godelian_io(
+Z_prime, A, L, multipliers, error_mode, theta_nat_computed, macro_indicators = calculate_godelian_io(
     mapping_air[status_air], mapping_lahan[status_lahan], theta_udara_calc,
     harga_hulu, utilisasi_mfg, kompetisi_jasa, X_target
 )
