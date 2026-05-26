@@ -81,3 +81,51 @@ st.info(f"""
 * **Indeks Komposit Kesehatan Alam ($\\theta_{{nat}}$):** {theta_nat_computed:.3f} 
 * **Catatan Lapangan:** Jika indikator multiplier Sektor 2 membengkak tinggi saat kualitas udara buruk atau air kritis, secara visual menunjukkan**'Pertumbuhan Semu'** akibat pemborosan struktural. Sebaliknya, jika utilisasi pabrik diset terlalu tinggi (>85%) dan terjadi perang harga di sektor jasa, daya ungkit ekonomi akan runtuh, membuktikan batas saturasi pasar.
 """)
+# --- [Tambahkan baris ini di bagian paling bawah file app.py Anda] ---
+
+st.markdown("---")
+st.header("📈 Kinerja 5 Indikator Makroekonomi Ter-Relaksasi")
+
+if not error_mode:
+    # Membuat 5 Kolom Visual untuk Metrik Makro
+    m1, m2, m3, m4, m5 = st.columns(5)
+    
+    with m1:
+        # PDB Total bisa naik semu jika f_nat tinggi
+        if theta_nat_computed < 0.5:
+            st.metric(label="🟢 PDB Total (Pertumbuhan)", value=f"{macro_indicators['PDB Total']:.2f}", delta="Semu (Boros Input)", delta_color="inverse")
+        else:
+            st.metric(label="🟢 PDB Total (Pertumbuhan)", value=f"{macro_indicators['PDB Total']:.2f}")
+            
+    with m2:
+        # Pendapatan RT drop jika kompetisi pasar jasa perang harga
+        delta_rt = "Tergerus Kompetisi" if kompetisi_jasa == "Perang Harga" else None
+        st.metric(label="👥 Pendapatan Rumah Tangga", value=f"{macro_indicators['Pendapatan Rumah Tangga']:.2f}", delta=delta_rt, delta_color="inverse")
+        
+    with m3:
+        st.metric(label="🏛️ Penerimaan Pajak Negara", value=f"{macro_indicators['Penerimaan Pajak']:.2f}")
+        
+    with m4:
+        # Indikator Subsidi Mubazir
+        delta_sub = "Pembengkakan Anggaran" if utilisasi_mfg > 80 else None
+        st.metric(label="💸 Subsidi Tercurah", value=f"{macro_indicators['Subsidi Digelontorkan']:.2f}", delta=delta_sub, delta_color="off")
+        
+    with m5:
+        st.metric(label="🧰 Penyerapan Tenaga Kerja", value=f"{int(macro_indicators['Penyerapan Tenaga Kerja'])} Orang")
+
+    # Narasi Evaluasi Kebijakan untuk Lampiran Essay Kang Yuhka
+    st.markdown("### 🔍 Tafsir Deteksi Titik Buta Kebijakan (Kritik Komputasi):")
+    
+    if kompetisi_jasa == "Perang Harga" or utilisasi_mfg > 80:
+        st.warning(f"""
+        **Peringatan Finansial (Rezim 2):** Meskipun angka **PDB Total ({macro_indicators['PDB Total']:.2f})** terlihat stabil atau meningkat, 
+        Indikator **Pendapatan Rumah Tangga** dan **Pajak** menunjukkan tren pengerutan. Ini membuktikan hipotesis Akang: 
+        *Over-competition* di pasar hilir menghancurkan kesejahteraan riil pekerja akibat marjin usaha yang habis dipakai perang harga.
+        """)
+    if theta_nat_computed < 0.5:
+        st.error(f"""
+        **Anomali Biofisik (Rezim 1):** Angka PDB melonjak bukan karena produktivitas, melainkan akibat peningkatan biaya ekstraksi alam yang hancur. 
+        Di saat yang sama, **Penyerapan Tenaga Kerja** hulu terhambat karena keterbatasan ruang fisik ekosistem.
+        """)
+else:
+    st.error("🚨 Sistem lumpuh secara total. Semua indikator ekonomi makro jatuh ke angka nol karena struktur kalkulasi kehilangan konsistensi logis akibat jepitan krisis ganda.")
