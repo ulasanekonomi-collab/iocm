@@ -79,5 +79,5 @@ with col2:
 st.subheader("🧠 Catatan Evaluasi Kebijakan (Kritik Logika)")
 st.info(f"""
 * **Indeks Komposit Kesehatan Alam ($\\theta_{{nat}}$):** {theta_nat_computed:.3f} 
-* **Catatan Lapangan:** Jika indikator multiplier Sektor 2 membengkak tinggi saat kualitas udara buruk atau air kritis, ini secara visual membuktikan kebenaran hipotesis Kang Yuhka mengenai **'Pertumbuhan Semu'** akibat pemborosan struktural. Sebaliknya, jika utilisasi pabrik diset terlalu tinggi (>85%) dan terjadi perang harga di sektor jasa, daya ungkit ekonomi akan runtuh, membuktikan batas saturasi pasar.
+* **Catatan Lapangan:** Jika indikator multiplier Sektor 2 membengkak tinggi saat kualitas udara buruk atau air kritis, secara visual menunjukkan**'Pertumbuhan Semu'** akibat pemborosan struktural. Sebaliknya, jika utilisasi pabrik diset terlalu tinggi (>85%) dan terjadi perang harga di sektor jasa, daya ungkit ekonomi akan runtuh, membuktikan batas saturasi pasar.
 """)
